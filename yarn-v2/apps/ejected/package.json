@@ -40,5 +40,8 @@
   },
   "eslintConfig": {
     "extends": "@acme/eslint-config"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   }
 }

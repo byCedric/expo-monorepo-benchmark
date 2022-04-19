@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "@acme/monorepo",
+  "scripts": {
+    "build": "pnpm run -r build",
+    "test": "pnpm run -r test",
+    "managed": "pnpm run --filter @acme/app-managed",
+    "ejected": "pnpm run --filter @acme/app-ejected",
+    "with-sentry": "pnpm run --filter @acme/app-with-sentry",
+    "with-dev-client": "pnpm run --filter @acme/app-with-dev-client"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
