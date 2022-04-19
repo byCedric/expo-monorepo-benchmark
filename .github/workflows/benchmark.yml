@@ -28,6 +28,11 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: 🏗 Setup Expo
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
+
       - name: 🏗 Setup npm
         working-directory: ../
         run: npm install -g npm@^7 && npm --version
@@ -50,6 +55,9 @@ jobs:
       - name: 🧪 Test project
         run: npm run test --workspaces
 
+      - name: 📱 Export bundle
+        run: cd ./apps/managed && expo export --public-url http:/127.0.0.1:8000 --experimental-bundle
+
   npm-v8:
     runs-on: ${{ matrix.os }}
     defaults:
@@ -67,6 +75,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
+
+      - name: 🏗 Setup Expo
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
 
       - name: 🏗 Setup npm v8
         working-directory: ../
@@ -90,6 +103,9 @@ jobs:
       - name: 🧪 Test project
         run: npm run test --workspaces
 
+      - name: 📱 Export bundle
+        run: cd ./apps/managed && expo export --public-url http:/127.0.0.1:8000 --experimental-bundle
+
   pnpm-v6:
     runs-on: ${{ matrix.os }}
     defaults:
@@ -107,6 +123,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
+
+      - name: 🏗 Setup Expo
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
 
       - name: 🏗 Setup pnpm v6
         uses: pnpm/action-setup@v2
@@ -131,6 +152,9 @@ jobs:
       - name: 🧪 Test project
         run: pnpm run -r test
 
+      - name: 📱 Export bundle
+        run: cd ./apps/managed && expo export --public-url http:/127.0.0.1:8000 --experimental-bundle
+
   pnpm-v7:
     runs-on: ${{ matrix.os }}
     defaults:
@@ -148,6 +172,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
+
+      - name: 🏗 Setup Expo
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
 
       - name: 🏗 Setup pnpm v7
         uses: pnpm/action-setup@v2
@@ -172,6 +201,9 @@ jobs:
       - name: 🧪 Test project
         run: pnpm run -r test
 
+      - name: 📱 Export bundle
+        run: cd ./apps/managed && expo export --public-url http:/127.0.0.1:8000 --experimental-bundle
+
   yarn-v1:
     runs-on: ${{ matrix.os }}
     defaults:
@@ -189,6 +221,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
+
+      - name: 🏗 Setup Expo
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
 
       - name: 🏗 Setup yarn v1
         working-directory: ../
@@ -215,6 +252,9 @@ jobs:
       - name: 🧪 Test project
         run: yarn workspaces run test
 
+      - name: 📱 Export bundle
+        run: cd ./apps/managed && expo export --public-url http:/127.0.0.1:8000 --experimental-bundle
+
   yarn-v2:
     runs-on: ${{ matrix.os }}
     defaults:
@@ -232,6 +272,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
+
+      - name: 🏗 Setup Expo
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
 
       - name: 🏗 Setup yarn v2
         working-directory: ../
@@ -257,3 +302,6 @@ jobs:
       
       - name: 🧪 Test project
         run: yarn workspaces run test
+
+      - name: 📱 Export bundle
+        run: cd ./apps/managed && expo export --public-url http:/127.0.0.1:8000 --experimental-bundle
