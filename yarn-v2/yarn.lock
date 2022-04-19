@@ -16,6 +16,8 @@ __metadata:
     "@types/react": ~17.0.21
     "@types/react-dom": ~17.0.9
     "@types/react-native": ~0.64.12
+    eslint: 7.32.0
+    eslint-config-universe: ^8.0.0
     expo: ^44.0.0
     expo-file-system: ~13.1.0
     expo-splash-screen: ~0.14.1
@@ -44,6 +46,8 @@ __metadata:
     "@types/react": ~17.0.21
     "@types/react-dom": ~17.0.9
     "@types/react-native": ~0.64.12
+    eslint: 7.32.0
+    eslint-config-universe: ^8.0.0
     expo: ^44.0.0
     expo-status-bar: ~1.2.0
     react: 17.0.1
@@ -66,6 +70,8 @@ __metadata:
     "@types/react": ~17.0.21
     "@types/react-dom": ~17.0.9
     "@types/react-native": ~0.64.12
+    eslint: 7.32.0
+    eslint-config-universe: ^8.0.0
     expo: ^44.0.0
     expo-dev-client: ~0.8.0
     expo-splash-screen: ~0.14.1
@@ -97,6 +103,8 @@ __metadata:
     "@types/react": ~17.0.21
     "@types/react-dom": ~17.0.9
     "@types/react-native": ~0.64.12
+    eslint: 7.32.0
+    eslint-config-universe: ^8.0.0
     expo: ^44.0.0
     expo-application: ~4.0.1
     expo-constants: ~13.0.0
@@ -119,6 +127,8 @@ __metadata:
   dependencies:
     "@babel/core": ^7.14.6
     babel-preset-expo: ^8.5.1
+    eslint: 7.32.0
+    eslint-config-universe: ^8.0.0
   languageName: unknown
   linkType: soft
 
@@ -149,6 +159,8 @@ __metadata:
     "@tsconfig/recommended": ^1.0.1
     "@types/react": ^17.0.44
     "@types/react-native": 0.64.x
+    eslint: 7.32.0
+    eslint-config-universe: ^8.0.0
     react: ^17.0.2
     react-native: 0.64.3
     react-native-builder-bob: ^0.18.1
