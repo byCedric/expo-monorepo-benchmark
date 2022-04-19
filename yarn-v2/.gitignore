@@ -4,7 +4,6 @@ packages/*/build
 
 # Yarn berry
 .yarn
-!.yarn/releases
 
 # Expo
 .expo
