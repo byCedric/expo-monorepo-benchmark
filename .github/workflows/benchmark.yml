@@ -282,7 +282,7 @@ jobs:
 
       - name: 🏗 Setup yarn v2
         working-directory: ../
-        run: yarn set version berry && yarn --version
+        run: yarn set version berry && yarn plugin import workspace-tools && yarn --version
 
       - name: 🕵️ Find yarn cache
         id: yarn-cache
