@@ -1,0 +1,24 @@
+{
+  "build": {
+    "base": {
+      "node": "16.14.2"
+    },
+    "development": {
+      "extends": "base",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "extends": "base",
+      "distribution": "store",
+      "android": {
+        "buildType": "app-bundle"
+      }
+    }
+  },
+  "cli": {
+    "version": ">= 0.47.0"
+  }
+}

@@ -1,0 +1,253 @@
+name: benchmark:
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  npm-v7:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run: npm-v7
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cache: [enabled, disabled]
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: 🏗 Setup npm
+        working-directory: ../
+        run: npm install -g npm@^7 && npm --version
+
+      - name: ♻️ Restore cache
+        uses: actions/cache@v3
+        if: ${{ matrix.cache == 'enabled' }}
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('./npm-v7/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: 📦 Install dependencies
+        run: npm install 
+
+      - name: 👷 Build project
+        run: npm run build --workspaces
+      
+      - name: 🧪 Test project
+        run: npm run test --workspaces
+
+  npm-v8:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run: npm-v8
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cache: [enabled, disabled]
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: 🏗 Setup npm v8
+        working-directory: ../
+        run: npm install -g npm@^8 && npm --version
+
+      - name: ♻️ Restore cache
+        uses: actions/cache@v3
+        if: ${{ matrix.cache == 'enabled' }}
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('npm-v8/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: 📦 Install dependencies
+        run: npm install 
+
+      - name: 👷 Build project
+        run: npm run build --workspaces
+      
+      - name: 🧪 Test project
+        run: npm run test --workspaces
+
+  pnpm-v6:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run: pnpm-v6
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cache: [enabled, disabled]
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: 🏗 Setup pnpm v6
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.x
+
+      - name: ♻️ Restore cache
+        uses: actions/cache@v3
+        if: ${{ matrix.cache == 'enabled' }}
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('pnpm-v6/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - name: 📦 Install dependencies
+        run: pnpm install --shamefully-hoist
+
+      - name: 👷 Build project
+        run: pnpm run -r build
+      
+      - name: 🧪 Test project
+        run: pnpm run -r test
+
+  pnpm-v7:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run: pnpm-v7
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cache: [enabled, disabled]
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: 🏗 Setup pnpm v7
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.x
+
+      - name: ♻️ Restore cache
+        uses: actions/cache@v3
+        if: ${{ matrix.cache == 'enabled' }}
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('pnpm-v7/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - name: 📦 Install dependencies
+        run: pnpm install --shamefully-hoist
+
+      - name: 👷 Build project
+        run: pnpm run -r build
+      
+      - name: 🧪 Test project
+        run: pnpm run -r test
+
+  yarn-v1:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run: yarn-v1
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cache: [enabled, disabled]
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: 🏗 Setup yarn v1
+        working-directory: ../
+        run: npm install -g yarn@^1 && yarn --version
+
+      - name: 🕵️ Find yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: ♻️ Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn-v1/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: 📦 Install dependencies
+        run: yarn install 
+
+      - name: 👷 Build project
+        run: yarn workspaces run build
+      
+      - name: 🧪 Test project
+        run: yarn workspaces run test
+
+  yarn-v2:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run: yarn-v2
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cache: [enabled, disabled]
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: 🏗 Setup yarn v2
+        working-directory: ../
+        run: npm install -g yarn@^1 && yarn set version berry && yarn --version
+
+      - name: 🕵️ Find yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache cacheFolder)"
+
+      - name: ♻️ Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn-v1/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: 📦 Install dependencies
+        run: yarn install 
+
+      - name: 👷 Build project
+        run: yarn workspaces run build
+      
+      - name: 🧪 Test project
+        run: yarn workspaces run test

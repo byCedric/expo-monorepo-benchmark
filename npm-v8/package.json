@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "@acme/monorepo",
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "managed": "npm run --workspace @acme/app-managed",
+    "ejected": "npm run --workspace @acme/app-ejected",
+    "with-sentry": "npm run --workspace @acme/app-with-sentry",
+    "with-dev-client": "npm run --workspace @acme/app-with-dev-client"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
