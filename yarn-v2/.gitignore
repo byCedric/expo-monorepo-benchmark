@@ -2,6 +2,10 @@
 apps/*/credentials.json
 packages/*/build
 
+# Yarn berry
+.yarn
+!.yarn/releases
+
 # Expo
 .expo
 __generated__
