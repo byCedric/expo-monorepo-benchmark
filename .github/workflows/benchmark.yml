@@ -146,7 +146,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: 📦 Install dependencies
-        run: pnpm install --shamefully-hoist
+        run: pnpm install
 
       - name: 👷 Build project
         run: pnpm run -r build
@@ -195,7 +195,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: 📦 Install dependencies
-        run: pnpm install --shamefully-hoist
+        run: pnpm install
 
       - name: 👷 Build project
         run: pnpm run -r build
