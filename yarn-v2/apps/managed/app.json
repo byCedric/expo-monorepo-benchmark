@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "eas-monorepo-app-managed",
-    "slug": "eas-monorepo-app-managed",
+    "name": "eas-benchmark-yarn-v2",
+    "slug": "eas-benchmark-yarn-v2",
     "owner": "bycedric",
     "version": "1.0.0",
     "orientation": "portrait",
